@@ -1,15 +1,16 @@
 package com.example.prac.Controller;
 
-
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class MemberController {
+@AllArgsConstructor
+public class HomeController {
 
-    @GetMapping("/hello")
-    public String hello(){
-        System.out.println("halloo");
-        return "hello!!";
+    @GetMapping("/")
+    public String index() {
+        return "/index";
     }
+
 }
