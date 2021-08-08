@@ -1,36 +1,29 @@
 package com.example.prac.Dto;
 
 import com.example.prac.Domain.Account;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.security.*;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.util.Collection;
 
 @Data
 @NoArgsConstructor
+@Getter
+@Setter
 public class AccountForm {
     private Long id;
     private String username;
     private String password;
     private String role;
 
-    public Account toEntity(){
-        return Account.builder()
-                .id(id)
-                .username(username)
-                .password(new BCryptPasswordEncoder().encode(password))
-                .role(role)
-                .build();
-    }
-
     @Builder
-    public AccountForm(Long id, String username,String password, String role) {
+    public AccountForm(Long id, String username, String password, String role) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.role = role;
     }
-
 
 }

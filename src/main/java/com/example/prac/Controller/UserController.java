@@ -3,34 +3,48 @@ package com.example.prac.Controller;
 import com.example.prac.Dto.AccountForm;
 import com.example.prac.Service.AccountService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 
 @Controller
 @RequiredArgsConstructor
 public class UserController {
     private final AccountService accountService;
 
-    @GetMapping("/loginUser")
-    public String createUserForm(Model model){
-        model.addAttribute("userForm", new AccountForm());
-        return "user/login/register";
+    @GetMapping("/signup")
+    public String createUserForm(){
+        System.out.println("get registerUser");
+        return "signup";
     }
 
+    @PostMapping("/signup")
+    public String createUser(AccountForm form){
+        System.out.println("post registerUser");
+        accountService.save(form);
+        return "redirect:/login";
+    }
 
-    @PostMapping("/loginUser")
-    public String createUser(@Valid AccountForm form, BindingResult result){
-        if(result.hasErrors()){
-            return "user/login/register";
-        }
-        accountService.createUser(form);
+    @GetMapping("/login")
+    public String getLogin(){
+        System.out.println("get Login");
+        return "login";
+    }
 
-        return "redirectL/";
+    @PostMapping("/login")
+    public String postLogin(){
+        return "main";
+    }
 
+    @GetMapping("/logout")
+    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
+        new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
+        return "redirect:/";
     }
 }

@@ -4,21 +4,35 @@ import com.example.prac.Domain.Account;
 import com.example.prac.Dto.AccountForm;
 import com.example.prac.Repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
 @Service
-@Transactional()
+@Transactional
 @RequiredArgsConstructor
-public class AccountService {
+public class AccountService implements UserDetailsService{
 
     private final AccountRepository accountRepository;
 
-    @Transactional
-    public Long createUser(AccountForm form){
-        Account account = form.toEntity();
-        accountRepository.save(account);
-        return account.getId();
+    @Override
+    public Account loadUserByUsername(String username) throws UsernameNotFoundException {
+        return accountRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException(username));
     }
+
+    public Long save(AccountForm accountForm) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        accountForm.setPassword(encoder.encode(accountForm.getPassword()));
+
+        return accountRepository.save(Account.builder()
+                .username(accountForm.getUsername())
+                .role(accountForm.getRole())
+                .password(accountForm.getPassword()).build()).getId();
+    }
+
 }
