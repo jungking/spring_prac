@@ -39,7 +39,7 @@ public class UserController {
 
     @PostMapping("/login")
     public String postLogin(){
-        return "main";
+        return "redirect:/";
     }
 
     @GetMapping("/logout")
