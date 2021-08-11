@@ -6,11 +6,10 @@
 </head>
 <body>
 <h1>Login</h1> <hr>
-<img src="/img/info.jpeg"  alt=""/>
 
 <form action="/login" method="POST">
-    username : <input type="text" name="username"> <br>
-    password : <input type="password" name="password"> <br>
+    username : <input type="text" th:name="username"> <br>
+    password : <input type="password" th:name="password"> <br>
     <button type="submit">Login</button>
 </form> <br>
 
