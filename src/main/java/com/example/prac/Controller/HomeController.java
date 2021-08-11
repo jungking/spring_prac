@@ -11,8 +11,6 @@ public class HomeController {
 
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("model");
-        System.out.println("main");
         return "main";
     }
 
