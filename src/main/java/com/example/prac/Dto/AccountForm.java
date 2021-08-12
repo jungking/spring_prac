@@ -1,12 +1,6 @@
 package com.example.prac.Dto;
 
-import com.example.prac.Domain.Account;
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import java.util.Collection;
 
 @Data
 @NoArgsConstructor
