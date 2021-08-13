@@ -3,8 +3,11 @@ package com.example.prac.Controller;
 import com.example.prac.Dto.PostForm;
 import com.example.prac.Service.PostService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 public class PostController {
@@ -15,8 +18,10 @@ public class PostController {
     }
 
     @GetMapping("/post")
-    public String GetPost(){
+    public String GetPost(Model model){
         System.out.println("getPosting page");
+        List<PostForm> postList = postService.getPostList();
+        model.addAttribute("postList",postList);
         return "post";
     }
 
@@ -35,10 +40,6 @@ public class PostController {
     @PostMapping("/upload")
     public String PostUploadPosting(PostForm postForm) {
         System.out.println("post upload post");
-        System.out.println(postForm.getTitle());
-        System.out.println( postForm.getContent());
-        System.out.println(postForm.getUserid());
-
         postService.save(postForm);
         return "redirect:post";
     }

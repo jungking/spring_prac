@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Post_Entity {
+public class PostEntity {
 
     @Id
     @Column(name = "id")
@@ -27,7 +27,8 @@ public class Post_Entity {
     private String userid;
 
     @Builder
-    public Post_Entity(String title, String content, String userid){
+    public PostEntity(Long id, String title, String content, String userid){
+        this.id = id;
         this.title = title;
         this.content = content;
         this.userid = userid;
