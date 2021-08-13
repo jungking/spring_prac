@@ -10,24 +10,24 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class PostEntity {
+public class Post_Entity {
 
     @Id
-    @Column(name = "post_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="post_title")
+    @Column(name="title")
     private String title;
 
-    @Column(name="post_content")
+    @Column(name="content")
     private String content;
 
     @Column(name = "userid")
     private String userid;
 
     @Builder
-    public PostEntity(String title, String content, String userid){
+    public Post_Entity(String title, String content, String userid){
         this.title = title;
         this.content = content;
         this.userid = userid;

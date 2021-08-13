@@ -3,13 +3,16 @@ package com.example.prac.Controller;
 import com.example.prac.Dto.PostForm;
 import com.example.prac.Service.PostService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class PostController {
-    public PostService postService;
+    private final PostService postService;
+
+    public PostController(PostService postService) {
+        this.postService = postService;
+    }
 
     @GetMapping("/post")
     public String GetPost(){
@@ -37,6 +40,6 @@ public class PostController {
         System.out.println(postForm.getUserid());
 
         postService.save(postForm);
-        return "post";
+        return "redirect:post";
     }
 }
