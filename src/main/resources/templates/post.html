@@ -7,7 +7,18 @@
 <body>
     (id, title, content, userid) <br>
     <span th:text="${postList}"></span><br>
-
+    <table border="1">
+        <th>id</th>
+        <th>title</th>
+        <th>content</th>
+        <th>userid</th>
+        <tr th:each = "data : ${postList}">
+            <td th:text="${data.id}"></td>
+            <td th:text="${data.title}"></td>
+            <td th:text="${data.content}"></td>
+            <td th:text="${data.userid}"></td>
+        </tr>
+    </table>
 
 <form method = "GET" action ="/upload">
     <button type = "submit">post upload</button>
