@@ -26,6 +26,7 @@ public class PostService {
                 .userid(postForm.getUserid()).build()).getId();
     }
 
+    @Transactional
     public void postDelete(Long id) throws Exception{
         postRepository.deleteById(id);
     }

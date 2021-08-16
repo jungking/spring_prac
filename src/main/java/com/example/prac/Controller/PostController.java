@@ -4,10 +4,7 @@ import com.example.prac.Dto.PostForm;
 import com.example.prac.Service.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -46,8 +43,8 @@ public class PostController {
         return "redirect:/post";
     }
 
-    @DeleteMapping("/post/postDelete")
-    public String PostDelete(@RequestParam("id") long id) throws Exception{
+    @PostMapping("/post/{id}")
+    public String PostDelete(@PathVariable("id") long id) throws Exception{
         postService.postDelete(id);
         return "post";
     }
