@@ -18,10 +18,14 @@
             <td th:text="${data.title}"></td>
             <td th:text="${data.content}"></td>
             <td th:text="${data.userid}"></td>
-            <td><button type="submit">수정</button></td>'
+
+            <form th:action="@{'/post/sujung/' + ${data.id}}" method="get">
+                <td><button type="submit">수정</button></td>
+            </form>
 
             <form th:action="@{'/post/' + ${data.id}}" method="post">
-            <td><input type="hidden" name="id" value="delete"/><button type="submit">삭제</button></td>
+            <td>
+                <button type="submit">삭제</button></td>
             </form>
 
         </tr>

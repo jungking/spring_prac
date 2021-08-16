@@ -19,6 +19,7 @@ public class PostService {
     @Autowired
     private final PostRepository postRepository;
 
+    @Transactional
     public Long save(PostForm postForm){
         return postRepository.save(PostEntity.builder()
                 .title(postForm.getTitle())
@@ -44,14 +45,17 @@ public class PostService {
     public List<PostForm> getPostList(){
         List<PostEntity> postEntities = postRepository.findAll();
         List<PostForm> postDtoList = new ArrayList<>();
-
         if(postEntities.isEmpty()) return postDtoList;
-
         for(PostEntity postEntity : postEntities){
             postDtoList.add(this.convertEntityToDto(postEntity));
         }
-
         return postDtoList;
+    }
+
+    @Transactional
+    public PostForm getPost(Long id){
+        PostEntity postEntity = postRepository.findById(id).get();
+        return convertEntityToDto(postEntity);
     }
 
 

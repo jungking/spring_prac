@@ -46,7 +46,22 @@ public class PostController {
     @PostMapping("/post/{id}")
     public String PostDelete(@PathVariable("id") long id) throws Exception{
         postService.postDelete(id);
-        return "post";
+        return "redirect:/post";
+    }
+
+    @GetMapping("/post/sujung/{id}")
+    public String GetUpdate(@PathVariable("id") Long id, Model model) {
+        System.out.println("get update post");
+        PostForm postForm = postService.getPost(id);
+        model.addAttribute("postList",postForm);
+        return "sujung";
+    }
+
+    @PostMapping("/post/sujung/{id}")
+    public String PostUpdate(PostForm postForm) {
+        System.out.println("post update post");
+        postService.save(postForm);
+        return "redirect:/post";
     }
 
 }
