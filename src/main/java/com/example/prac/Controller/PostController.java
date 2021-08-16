@@ -4,8 +4,10 @@ import com.example.prac.Dto.PostForm;
 import com.example.prac.Service.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -31,16 +33,23 @@ public class PostController {
         return "post";
     }
 
-    @GetMapping("/upload")
+    @GetMapping("/post/edit")
     public String GetUploadPosting(){
         System.out.println("get upload post");
-        return "upload";
+        return "redirect:/edit";
     }
 
-    @PostMapping("/upload")
+    @PostMapping("/post/edit")
     public String PostUploadPosting(PostForm postForm) {
         System.out.println("post upload post");
         postService.save(postForm);
-        return "redirect:post";
+        return "redirect:/post";
     }
+
+    @DeleteMapping("/post/postDelete")
+    public String PostDelete(@RequestParam("id") long id) throws Exception{
+        postService.postDelete(id);
+        return "post";
+    }
+
 }

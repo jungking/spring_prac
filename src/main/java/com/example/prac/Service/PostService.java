@@ -26,6 +26,10 @@ public class PostService {
                 .userid(postForm.getUserid()).build()).getId();
     }
 
+    public void postDelete(Long id) throws Exception{
+        postRepository.deleteById(id);
+    }
+
     private PostForm convertEntityToDto(PostEntity postEntity){
         return PostForm.builder()
                 .id(postEntity.getId())
