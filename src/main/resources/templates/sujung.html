@@ -6,13 +6,13 @@
 </head>
 <body>
 <span th:text="${postList}"></span><br>
-
-    title : <input type="text" th:name="title" th:value="${postList.title}"> <br>
-    userid :  <input type="text" th:name="userid" th:value="${postList.userid}"><br>
-    content : <textarea type="text" th:name="content" th:value="${postList.content}"></textarea><br>
-
     <form th:action="@{'/post/sujung/' + ${postList.id}}" method="post">
-        <button type = "submit">submit</button>
+        <input type="hidden" name="_method" value="put"/>
+        title : <input type="text" th:name="title" th:value="${postList.title}"> <br>
+        userid :  <input type="text" th:name="userid" th:value="${postList.userid}"><br>
+        content : <input type="text" th:name="content" th:value="${postList.content}"/><br>
+
+        <button  type = "submit">submit</button>
     </form>
 
 

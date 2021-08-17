@@ -57,9 +57,10 @@ public class PostController {
         return "sujung";
     }
 
-    @PostMapping("/post/sujung/{id}")
-    public String PostUpdate(PostForm postForm) {
+    @PutMapping("/post/sujung/{id}")
+    public String PostUpdate(@PathVariable("id") long id, PostForm postForm) {
         System.out.println("post update post");
+        postForm.setId(id);
         postService.save(postForm);
         return "redirect:/post";
     }

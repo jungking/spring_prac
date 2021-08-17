@@ -21,10 +21,7 @@ public class PostService {
 
     @Transactional
     public Long save(PostForm postForm){
-        return postRepository.save(PostEntity.builder()
-                .title(postForm.getTitle())
-                .content(postForm.getContent())
-                .userid(postForm.getUserid()).build()).getId();
+        return postRepository.save(postForm.toEntity()).getId();
     }
 
     @Transactional
@@ -58,6 +55,10 @@ public class PostService {
         return convertEntityToDto(postEntity);
     }
 
+    @Transactional
+    public Long updatePost(PostForm postForm){
+        return postRepository.save(postForm.toEntity()).getId();
+    }
 
 
 }
