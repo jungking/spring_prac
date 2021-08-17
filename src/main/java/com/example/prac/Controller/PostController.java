@@ -4,8 +4,7 @@ import com.example.prac.Dto.PostForm;
 import com.example.prac.Service.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,16 +30,38 @@ public class PostController {
         return "post";
     }
 
-    @GetMapping("/upload")
+    @GetMapping("/post/edit")
     public String GetUploadPosting(){
         System.out.println("get upload post");
-        return "upload";
+        return "redirect:/edit";
     }
 
-    @PostMapping("/upload")
+    @PostMapping("/post/edit")
     public String PostUploadPosting(PostForm postForm) {
         System.out.println("post upload post");
         postService.save(postForm);
-        return "redirect:post";
+        return "redirect:/post";
     }
+
+    @PostMapping("/post/{id}")
+    public String PostDelete(@PathVariable("id") long id) throws Exception{
+        postService.postDelete(id);
+        return "redirect:/post";
+    }
+
+    @GetMapping("/post/sujung/{id}")
+    public String GetUpdate(@PathVariable("id") Long id, Model model) {
+        System.out.println("get update post");
+        PostForm postForm = postService.getPost(id);
+        model.addAttribute("postList",postForm);
+        return "sujung";
+    }
+
+    @PostMapping("/post/sujung/{id}")
+    public String PostUpdate(PostForm postForm) {
+        System.out.println("post update post");
+        postService.save(postForm);
+        return "redirect:/post";
+    }
+
 }
