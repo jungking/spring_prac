@@ -54,7 +54,7 @@ public class PostController {
         System.out.println("get update post");
         PostForm postForm = postService.getPost(id);
         model.addAttribute("postList",postForm);
-        return "/post/sujung";
+        return "redirect:/post/sujung";
     }
 
     @PutMapping("/post/sujung/{id}")
