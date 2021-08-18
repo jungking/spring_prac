@@ -21,7 +21,7 @@ public class PostController {
         System.out.println("getPosting page");
         List<PostForm> postList = postService.getPostList();
         model.addAttribute("postList",postList);
-        return "post";
+        return "/post/post";
     }
 
     @PostMapping("/post")
@@ -33,7 +33,7 @@ public class PostController {
     @GetMapping("/post/edit")
     public String GetUploadPosting(){
         System.out.println("get upload post");
-        return "redirect:/edit";
+        return "/post/edit";
     }
 
     @PostMapping("/post/edit")
@@ -54,7 +54,7 @@ public class PostController {
         System.out.println("get update post");
         PostForm postForm = postService.getPost(id);
         model.addAttribute("postList",postForm);
-        return "sujung";
+        return "/post/sujung";
     }
 
     @PutMapping("/post/sujung/{id}")
@@ -62,7 +62,7 @@ public class PostController {
         System.out.println("post update post");
         postForm.setId(id);
         postService.save(postForm);
-        return "redirect:/post";
+        return "redirect:../";
     }
 
 }
