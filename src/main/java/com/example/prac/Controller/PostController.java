@@ -6,12 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
 public class PostController {
     private final PostService postService;
-
     public PostController(PostService postService) {
         this.postService = postService;
     }
@@ -38,7 +38,7 @@ public class PostController {
     }
 
     @GetMapping("/post/read/{id}")
-    public String PostRead(@PathVariable("id") long id, Model model) throws Exception{
+    public String PostRead(@PathVariable("id") long id, Model model, HttpSession session) throws Exception{
         PostForm postForm = postService.getPost(id);
         model.addAttribute("postRead", postForm);
         return "/post/read";

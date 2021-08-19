@@ -9,9 +9,9 @@
     title : <span th:text="${postRead.title}"></span><br>
     userid :  <span th:text="${postRead.userid}"></span><br>
     content : <span th:text="${postRead.content}"></span><br>
-
+    <span th:text="${userid}"></span>
     <form th:action="@{'/post/update/' + ${postRead.id}}" method="get">
-        <button  type = "submit">수정</button>
+        <button type = "submit">수정</button> <br>
     </form>
 
     <form th:action="@{'/post/delete/' + ${postRead.id}}" method="POST">

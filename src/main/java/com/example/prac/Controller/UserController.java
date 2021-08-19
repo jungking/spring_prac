@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequiredArgsConstructor
 public class UserController {
     private final AccountService accountService;
-
     @GetMapping("/signup")
     public String createUserForm(){
         System.out.println("get registerUser");
@@ -39,8 +39,9 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String postLogin(@AuthenticationPrincipal AccountForm accountForm, Model model){
+    public String postLogin(@AuthenticationPrincipal AccountForm accountForm, Model model, HttpSession session){
         System.out.println(accountForm);
+        session.setAttribute("userid",accountForm.getUsername());
         model.addAttribute("member",accountForm);
         return "redirect:/";
     }
