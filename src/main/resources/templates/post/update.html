@@ -6,7 +6,7 @@
 </head>
 <body>
 <span th:text="${postList}"></span><br>
-    <form th:action="@{'/post/sujung/' + ${postList.id}}" method="post">
+    <form th:action="@{'/post/update/' + ${postList.id}}" method="post">
         <input type="hidden" name="_method" value="put"/>
         title : <input type="text" th:name="title" th:value="${postList.title}"> <br>
         userid :  <input type="text" th:name="userid" th:value="${postList.userid}"><br>
@@ -14,10 +14,7 @@
 
         <button  type = "submit">submit</button>
     </form>
-    <form th:action="@{'/post/submit' + ${data.id}}" method="POST">
-        <td>
-            <button type="submit">삭제</button></td>
-    </form>
+
 
 
 
