@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 public class UserController {
     private final AccountService accountService;
+
     @GetMapping("/signup")
     public String createUserForm(){
         System.out.println("get registerUser");
@@ -35,15 +36,7 @@ public class UserController {
     @GetMapping("/login")
     public String getLogin(){
         System.out.println("get Login");
-        return "login";
-    }
-
-    @PostMapping("/login")
-    public String postLogin(@AuthenticationPrincipal AccountForm accountForm, Model model, HttpSession session){
-        System.out.println(accountForm);
-        session.setAttribute("userid",accountForm.getUsername());
-        model.addAttribute("member",accountForm);
-        return "redirect:/";
+        return "/login";
     }
 
     @GetMapping("/logout")

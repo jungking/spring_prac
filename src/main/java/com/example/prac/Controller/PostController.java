@@ -6,12 +6,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class PostController {
     private final PostService postService;
+    HttpSession session;
+    String user;
     public PostController(PostService postService) {
         this.postService = postService;
     }
@@ -24,6 +28,7 @@ public class PostController {
     }
     @PostMapping("/post")
     public String PostPost(){
+
         return "post";
     }
 
@@ -31,6 +36,7 @@ public class PostController {
     public String GetUploadPosting(){
         return "/post/edit";
     }
+
     @PostMapping("/post/edit")
     public String PostUploadPosting(PostForm postForm) {
         postService.save(postForm);
@@ -38,23 +44,36 @@ public class PostController {
     }
 
     @GetMapping("/post/read/{id}")
-    public String PostRead(@PathVariable("id") long id, Model model, HttpSession session) throws Exception{
+    public String PostRead(@PathVariable("id") long id, Model model) throws Exception{
         PostForm postForm = postService.getPost(id);
         model.addAttribute("postRead", postForm);
+        user = postForm.getUserid();
         return "/post/read";
     }
 
     @PostMapping("/post/delete/{id}")
-    public String PostDelete(@PathVariable("id") long id) throws Exception{
-        postService.postDelete(id);
-        return "redirect:/post";
+    public String PostDelete(@PathVariable("id") long id, HttpServletRequest request) throws Exception{
+        if(!user.equals(request.getSession().getAttribute("userid"))){
+            System.out.println("아이디가 다름");
+            return "redirect:/post";
+        }
+        else{
+            postService.postDelete(id);
+            return "redirect:/post";
+        }
     }
 
     @GetMapping("/post/update/{id}")
-    public String GetUpdate(@PathVariable("id") Long id, Model model) {
-        PostForm postForm = postService.getPost(id);
-        model.addAttribute("postList",postForm);
-        return "/post/update";
+    public String GetUpdate(@PathVariable("id") Long id, Model model, HttpServletRequest request) {
+        if(!user.equals(request.getSession().getAttribute("userid"))){
+            System.out.println("아이디가 다름");
+            return "redirect:/post";
+        }
+        else {
+            PostForm postForm = postService.getPost(id);
+            model.addAttribute("postList", postForm);
+            return "/post/update";
+        }
     }
     @PutMapping("/post/update/{id}")
     public String PostUpdate(@PathVariable("id") long id, PostForm postForm) {
