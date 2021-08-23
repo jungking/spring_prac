@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <input type="hidden" name="_method" value="put"/>
+    title : <span th:text="${postRead.title}"></span><br>
+    userid :  <span th:text="${postRead.userid}"></span><br>
+    content : <span th:text="${postRead.content}"></span><br>
+    <div th:if = "${session.userid} == ${postRead.userid}">
+        <form th:action="@{'/post/update/' + ${postRead.id}}" method="get">
+            <button type = "submit">수정</button> <br>
+        </form>
+    </div>
+    <div th:if = "${session.userid} == ${postRead.userid}">
+         <form th:action="@{'/post/delete/' + ${postRead.id}}" method="POST">
+             <td>
+                <button type="submit">삭제</button></td>
+         </form>
+    </div>
+
+</body>
+</html>

@@ -1,6 +1,7 @@
 package com.example.prac.Config;
 
 import com.example.prac.Service.AccountService;
+import com.example.prac.Service.MyLoginSuccessHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -35,6 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // 2
                 .formLogin() // 7
                 .loginPage("/login") // 로그인 페이지 링크
                 .defaultSuccessUrl("/") // 로그인 성공 후 리다이렉트 주소
+                .successHandler(new MyLoginSuccessHandler())
                 .and()
                 .logout() // 8
                 .logoutSuccessUrl("/") // 로그아웃 성공시 리다이렉트 주소

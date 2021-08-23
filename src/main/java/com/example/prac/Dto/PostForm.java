@@ -1,5 +1,6 @@
 package com.example.prac.Dto;
 
+import com.example.prac.Domain.PostEntity;
 import lombok.*;
 
 @Getter
@@ -20,4 +21,13 @@ public class PostForm {
         this.userid = userid;
     }
 
+    public PostEntity toEntity() {
+        PostEntity postEntity = PostEntity.builder()
+                .id(id)
+                .title(title)
+                .content(content)
+                .userid(userid)
+                .build();
+        return postEntity;
+    }
 }

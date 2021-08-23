@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequiredArgsConstructor
@@ -35,14 +36,7 @@ public class UserController {
     @GetMapping("/login")
     public String getLogin(){
         System.out.println("get Login");
-        return "login";
-    }
-
-    @PostMapping("/login")
-    public String postLogin(@AuthenticationPrincipal AccountForm accountForm, Model model){
-        System.out.println(accountForm);
-        model.addAttribute("member",accountForm);
-        return "redirect:/";
+        return "/login";
     }
 
     @GetMapping("/logout")

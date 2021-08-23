@@ -6,62 +6,79 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class PostController {
     private final PostService postService;
-
+    HttpSession session;
+    String user;
     public PostController(PostService postService) {
         this.postService = postService;
     }
 
     @GetMapping("/post")
     public String GetPost(Model model){
-        System.out.println("getPosting page");
         List<PostForm> postList = postService.getPostList();
         model.addAttribute("postList",postList);
-        return "post";
+        return "/post/post";
     }
-
     @PostMapping("/post")
     public String PostPost(){
-        System.out.println("post post ");
+
         return "post";
     }
 
     @GetMapping("/post/edit")
     public String GetUploadPosting(){
-        System.out.println("get upload post");
-        return "redirect:/edit";
+        return "/post/edit";
     }
 
     @PostMapping("/post/edit")
     public String PostUploadPosting(PostForm postForm) {
-        System.out.println("post upload post");
         postService.save(postForm);
         return "redirect:/post";
     }
 
-    @PostMapping("/post/{id}")
-    public String PostDelete(@PathVariable("id") long id) throws Exception{
-        postService.postDelete(id);
-        return "redirect:/post";
-    }
-
-    @GetMapping("/post/sujung/{id}")
-    public String GetUpdate(@PathVariable("id") Long id, Model model) {
-        System.out.println("get update post");
+    @GetMapping("/post/read/{id}")
+    public String PostRead(@PathVariable("id") long id, Model model) throws Exception{
         PostForm postForm = postService.getPost(id);
-        model.addAttribute("postList",postForm);
-        return "sujung";
+        model.addAttribute("postRead", postForm);
+        user = postForm.getUserid();
+        return "/post/read";
     }
 
-    @PostMapping("/post/sujung/{id}")
-    public String PostUpdate(PostForm postForm) {
-        System.out.println("post update post");
+    @PostMapping("/post/delete/{id}")
+    public String PostDelete(@PathVariable("id") long id, HttpServletRequest request) throws Exception{
+        if(!user.equals(request.getSession().getAttribute("userid"))){
+            System.out.println("아이디가 다름");
+            return "redirect:/post";
+        }
+        else{
+            postService.postDelete(id);
+            return "redirect:/post";
+        }
+    }
+
+    @GetMapping("/post/update/{id}")
+    public String GetUpdate(@PathVariable("id") Long id, Model model, HttpServletRequest request) {
+        if(!user.equals(request.getSession().getAttribute("userid"))){
+            System.out.println("아이디가 다름");
+            return "redirect:/post";
+        }
+        else {
+            PostForm postForm = postService.getPost(id);
+            model.addAttribute("postList", postForm);
+            return "/post/update";
+        }
+    }
+    @PutMapping("/post/update/{id}")
+    public String PostUpdate(@PathVariable("id") long id, PostForm postForm) {
+        postForm.setId(id);
         postService.save(postForm);
         return "redirect:/post";
     }
-
 }
