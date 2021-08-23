@@ -16,8 +16,7 @@
     </div>
     <div th:if = "${session.userid} == ${postRead.userid}">
          <form th:action="@{'/post/delete/' + ${postRead.id}}" method="GET">
-             <td>
-                <button type="submit">삭제</button></td>
+                <button type="submit">삭제</button>
          </form>
     </div>
 
