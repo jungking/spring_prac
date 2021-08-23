@@ -32,7 +32,7 @@ public class PostController {
         return "post";
     }
 
-    @GetMapping("/post/edit")
+     @GetMapping("/post/edit")
     public String GetUploadPosting(){
         return "/post/edit";
     }
@@ -51,7 +51,7 @@ public class PostController {
         return "/post/read";
     }
 
-    @PostMapping("/post/delete/{id}")
+    @GetMapping("/post/delete/{id}")
     public String PostDelete(@PathVariable("id") long id, HttpServletRequest request) throws Exception{
         if(!user.equals(request.getSession().getAttribute("userid"))){
             System.out.println("아이디가 다름");
