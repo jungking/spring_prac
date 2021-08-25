@@ -15,17 +15,19 @@ public class CommentEntity {
 
     @Id @GeneratedValue
     @Column(name = "comment_id")
-    private Long Id;
+    private Long id;
 
+    @Column(name="title")
     private String title;
+
+    @Column(name="content")
     private String content;
+
+    @Column(name="userid")
     private String userid;
 
     @ManyToOne
     @JoinColumn(name = "post_id")
     private PostEntity postEntity;
 
-    public void setPost(PostEntity postEntity){
-        this.postEntity = postEntity;
-    }
 }

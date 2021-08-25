@@ -35,7 +35,7 @@ public class CommentController {
     @PostMapping("post/read/{id}/comment/{commentID}")
     public CommentEntity updateComment(@PathVariable Long id,@PathVariable Long commentID, @RequestBody CommentEntity commentEntity){
         Optional<PostEntity> postItem = postRepository.findById(id);
-        CommentEntity.setPost(postItem.get());
+        //CommentEntity.setPost(postItem.get());
         CommentEntity newComment = commentRepository.findById(commentID).get();
         newComment.setTitle(commentEntity.getTitle());
         newComment.setContent(commentEntity.getContent());
@@ -45,7 +45,7 @@ public class CommentController {
 
     @DeleteMapping("/post/read/{id}/comment/{commentID}")
     public String deleteComment(@PathVariable Long id, @PathVariable Long commentID){
-        commentRepository.deleteByID(commentID);
+        //commentRepository.deleteByID(id);
         return "delete success";
     }
 }

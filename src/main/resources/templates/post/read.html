@@ -19,6 +19,11 @@
                 <button type="submit">삭제</button>
          </form>
     </div>
+    <br><br><br>
+    <div th:action="@{'/post/read/' + ${postRead.userid} + '/comment'}" method="POST">
+        <button type = "submit">댓글 쓰러가기</button> <br>
+    </div>
+
 
 </body>
 </html>

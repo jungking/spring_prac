@@ -1,5 +1,6 @@
 package com.example.prac.Dto;
 
+import com.example.prac.Domain.PostEntity;
 import lombok.*;
 
 @Getter
@@ -11,6 +12,7 @@ public class CommentForm {
     private String title;
     private String content;
     private String userid;
+    private PostEntity postEntity;
 
     @Builder
     public CommentForm(Long id, String title, String content, String userid) {
