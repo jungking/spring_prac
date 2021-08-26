@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class PostEntity {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "post_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
