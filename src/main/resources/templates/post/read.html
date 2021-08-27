@@ -20,9 +20,9 @@
          </form>
     </div>
     <br><br><br>
-    <div th:action="@{'/post/read/' + ${postRead.userid} + '/comment'}" method="POST">
+    <form th:action="@{'/post/read/' + ${postRead.id} + '/comment'}" method="GET">
         <button type = "submit">댓글 쓰러가기</button> <br>
-    </div>
+    </form>
 
 
 </body>

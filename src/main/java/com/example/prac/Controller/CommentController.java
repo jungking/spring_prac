@@ -18,7 +18,7 @@ public class CommentController {
     @Autowired
     CommentRepository commentRepository;
 
-    @GetMapping("/post/read/{id}/comment")
+    @GetMapping("/post/read/{id}/comment") //json으로 넘어옴
     public List<CommentEntity> getPostComments(@PathVariable Long id){
         PostEntity postEntity = postRepository.findById(id).get();
         return commentRepository.findCommentsByPostEntity(postEntity);
