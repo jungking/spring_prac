@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -20,10 +22,34 @@
          </form>
     </div>
     <br><br><br>
-    <form th:action="@{'/post/read/' + ${postRead.id} + '/comment'}" method="GET">
-        <button type = "submit">댓글 쓰러가기</button> <br>
-    </form>
 
+    <div th:if = "${session.userid} == ${postRead.userid}">
+        <form th:action="@{'/post/delete/' + ${postRead.id}}" method="GET">
+            <button type="submit">삭제</button>
+        </form>
+    </div>
+    <div>
+        댓글 목록
+    <table border="1">
+        <th>id</th>
+        <th>title</th>
+        <th>content</th>
+        <th>userid</th>
+        <tr th:each = "comment : ${commentList}">
+            <td th:text= "${comment.id}"></td>
+            <td th:text= "${comment.title}"></td>
+            <td th:text= "${comment.content}"></td>
+            <td th:text= "${comment.userid}"></td>
+        </tr>
+    </table>
+    </div>
+
+    <form th:action="@{'/post/read/' + ${postRead.id} + '/comment/create'}" method="POST">
+        title :  <input type = "text" th:name="title"> <br>
+        comment :  <input type = "text" th:name="comment"> <br>
+        userid :  <input type = "text" th:name="userid"> <br>
+        <button type = "submit">댓글 작성하기</button> <br>
+    </form>
 
 </body>
 </html>

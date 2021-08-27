@@ -2,9 +2,12 @@ package com.example.prac.Controller;
 
 import com.example.prac.Domain.CommentEntity;
 import com.example.prac.Domain.PostEntity;
+import com.example.prac.Dto.CommentForm;
+import com.example.prac.Dto.PostForm;
 import com.example.prac.Repository.CommentRepository;
 import com.example.prac.Repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,12 +22,13 @@ public class CommentController {
     CommentRepository commentRepository;
 
     @GetMapping("/post/read/{id}/comment") //json으로 넘어옴
-    public List<CommentEntity> getPostComments(@PathVariable Long id){
+    public void getPostComments(@PathVariable Long id, Model model){
         PostEntity postEntity = postRepository.findById(id).get();
-        return commentRepository.findCommentsByPostEntity(postEntity);
+        List<CommentEntity> commentEntityList= commentRepository.findCommentsByPostEntity(postEntity);
+        model.addAttribute("commentList", commentEntityList);
     }
 
-    @PutMapping("/post/read/{id}/comment")
+    @PostMapping("/post/read/{id}/comment/create")
     public CommentEntity createComment(@PathVariable Long id, @RequestBody CommentEntity commentEntity){
         Optional<PostEntity> postItem = postRepository.findById(id);
         commentEntity.setPostEntity(postItem.get());

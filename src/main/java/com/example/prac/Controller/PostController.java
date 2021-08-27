@@ -1,7 +1,12 @@
 package com.example.prac.Controller;
 
+import com.example.prac.Domain.CommentEntity;
+import com.example.prac.Domain.PostEntity;
 import com.example.prac.Dto.PostForm;
+import com.example.prac.Repository.CommentRepository;
+import com.example.prac.Repository.PostRepository;
 import com.example.prac.Service.PostService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +21,11 @@ public class PostController {
     private final PostService postService;
     HttpSession session;
     String user;
+    @Autowired
+    PostRepository postRepository;
+    @Autowired
+    CommentRepository commentRepository;
+
     public PostController(PostService postService) {
         this.postService = postService;
     }
@@ -46,7 +56,12 @@ public class PostController {
     @GetMapping("/post/read/{id}")
     public String PostRead(@PathVariable("id") long id, Model model) throws Exception{
         PostForm postForm = postService.getPost(id);
+
+        PostEntity postEntity = postRepository.findById(id).get();
+        List<CommentEntity> commentEntityList= commentRepository.findCommentsByPostEntity(postEntity);
+
         model.addAttribute("postRead", postForm);
+        model.addAttribute("commentList",commentEntityList);
         user = postForm.getUserid();
         return "/post/read";
     }
