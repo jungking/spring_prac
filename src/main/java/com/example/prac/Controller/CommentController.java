@@ -29,11 +29,11 @@ public class CommentController {
     }
 
     @PostMapping("/post/read/{id}/comment/create")
-    public CommentEntity createComment(@PathVariable Long id, @RequestBody CommentEntity commentEntity){
+    public String createComment(@PathVariable Long id, CommentEntity commentEntity){
         Optional<PostEntity> postItem = postRepository.findById(id);
         commentEntity.setPostEntity(postItem.get());
         commentRepository.save(commentEntity);
-        return commentEntity;
+        return "post/read/{id}";
     }
 
     @PostMapping("post/read/{id}/comment/{commentID}")

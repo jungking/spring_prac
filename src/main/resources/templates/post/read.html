@@ -23,17 +23,12 @@
     </div>
     <br><br><br>
 
-    <div th:if = "${session.userid} == ${postRead.userid}">
-        <form th:action="@{'/post/delete/' + ${postRead.id}}" method="GET">
-            <button type="submit">삭제</button>
-        </form>
-    </div>
     <div>
         댓글 목록
     <table border="1">
         <th>id</th>
         <th>title</th>
-        <th>content</th>
+        <th>comment</th>
         <th>userid</th>
         <tr th:each = "comment : ${commentList}">
             <td th:text= "${comment.id}"></td>
