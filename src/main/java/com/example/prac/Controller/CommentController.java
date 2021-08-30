@@ -7,13 +7,15 @@ import com.example.prac.Dto.PostForm;
 import com.example.prac.Repository.CommentRepository;
 import com.example.prac.Repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@Controller
 public class CommentController {
     @Autowired
     PostRepository postRepository;
@@ -29,11 +31,12 @@ public class CommentController {
     }
 
     @PostMapping("/post/read/{id}/comment/create")
-    public String createComment(@PathVariable Long id, CommentEntity commentEntity){
+    public String createComment(@PathVariable Long id, CommentForm commentForm){
         Optional<PostEntity> postItem = postRepository.findById(id);
-        commentEntity.setPostEntity(postItem.get());
-        commentRepository.save(commentEntity);
-        return "post/read/{id}";
+        commentForm.setPostEntity(postItem.get());
+        commentRepository.save(commentForm.toEntity()).getId();
+        System.out.println(commentForm.getPostEntity());
+        return "redirect:/post/read/{id}";
     }
 
     @PostMapping("post/read/{id}/comment/{commentID}")

@@ -38,7 +38,6 @@ public class PostController {
     }
     @PostMapping("/post")
     public String PostPost(){
-
         return "post";
     }
 

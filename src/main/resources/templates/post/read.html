@@ -41,7 +41,7 @@
 
     <form th:action="@{'/post/read/' + ${postRead.id} + '/comment/create'}" method="POST">
         title :  <input type = "text" th:name="title"> <br>
-        comment :  <input type = "text" th:name="comment"> <br>
+        comment :  <input type = "text" th:name="content"> <br>
         userid :  <input type = "text" th:name="userid"> <br>
         <button type = "submit">댓글 작성하기</button> <br>
     </form>

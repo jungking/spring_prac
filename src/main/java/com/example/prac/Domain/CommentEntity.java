@@ -1,9 +1,6 @@
 package com.example.prac.Domain;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -13,8 +10,9 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CommentEntity {
 
-    @Id @GeneratedValue
+    @Id
     @Column(name = "comment_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name="title")
@@ -29,5 +27,14 @@ public class CommentEntity {
     @ManyToOne
     @JoinColumn(name = "post_id")
     private PostEntity postEntity;
+
+    @Builder
+    public CommentEntity(Long id, String title, String content, String userid, PostEntity postEntity){
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.userid = userid;
+        this.postEntity = postEntity;
+    }
 
 }
