@@ -34,7 +34,7 @@ public class CommentController {
     public String createComment(@PathVariable Long id, CommentForm commentForm){
         Optional<PostEntity> postItem = postRepository.findById(id);
         commentForm.setPostEntity(postItem.get());
-        commentRepository.save(commentForm.toEntity()).getId();
+        commentRepository.save(commentForm.toEntity());
         System.out.println(commentForm.getPostEntity());
         return "redirect:/post/read/{id}";
     }
