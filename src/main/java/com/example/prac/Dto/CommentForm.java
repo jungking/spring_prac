@@ -9,15 +9,13 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 public class CommentForm {
-    private Long id;
     private String title;
     private String content;
     private String userid;
     private PostEntity postEntity;
 
     @Builder
-    public CommentForm(Long id, String title, String content, String userid, PostEntity postEntity) {
-        this.id = id;
+    public CommentForm(String title, String content, String userid, PostEntity postEntity) {
         this.title = title;
         this.content = content;
         this.userid = userid;
@@ -26,7 +24,6 @@ public class CommentForm {
 
     public CommentEntity toEntity() {
         CommentEntity commentEntity = CommentEntity.builder()
-                .id(id)
                 .title(title)
                 .content(content)
                 .userid(userid)

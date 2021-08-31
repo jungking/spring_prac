@@ -3,25 +3,28 @@ package com.example.prac.Controller;
 import com.example.prac.Domain.CommentEntity;
 import com.example.prac.Domain.PostEntity;
 import com.example.prac.Dto.CommentForm;
-import com.example.prac.Dto.PostForm;
 import com.example.prac.Repository.CommentRepository;
 import com.example.prac.Repository.PostRepository;
+import com.example.prac.Service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Controller
 public class CommentController {
+    private final CommentService commentService;
+
     @Autowired
     PostRepository postRepository;
 
     @Autowired
     CommentRepository commentRepository;
+
+    public CommentController(CommentService commentService) { this.commentService = commentService;}
 
     @GetMapping("/post/read/{id}/comment") //json으로 넘어옴
     public void getPostComments(@PathVariable Long id, Model model){
@@ -34,7 +37,8 @@ public class CommentController {
     public String createComment(@PathVariable Long id, CommentForm commentForm){
         Optional<PostEntity> postItem = postRepository.findById(id);
         commentForm.setPostEntity(postItem.get());
-        commentRepository.save(commentForm.toEntity());
+        //commentRepository.save(commentForm.toEntity());
+        commentService.save(commentForm);
         System.out.println(commentForm.getPostEntity());
         return "redirect:/post/read/{id}";
     }
