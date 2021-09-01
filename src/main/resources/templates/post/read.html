@@ -35,6 +35,10 @@
             <td th:text= "${comment.title}"></td>
             <td th:text= "${comment.content}"></td>
             <td th:text= "${comment.userid}"></td>
+            <div th:if = "${comment.getUserid().toString().equals(postRead.getUserid().toString())}">
+                <td><button th:type="submit" >삭제</button></td>
+                <td><button th:type="submit" >수정</button></td>
+            </div>
         </tr>
     </table>
     </div>
