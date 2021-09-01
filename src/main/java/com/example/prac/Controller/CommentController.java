@@ -43,7 +43,7 @@ public class CommentController {
         return "redirect:/post/read/{id}";
     }
 
-    @PostMapping("post/read/{id}/comment/{commentID}")
+    @PostMapping("post/read/{id}/comment/update/{commentID}")
     public CommentEntity updateComment(@PathVariable Long id,@PathVariable Long commentID, @RequestBody CommentEntity commentEntity){
         Optional<PostEntity> postItem = postRepository.findById(id);
         //CommentEntity.setPost(postItem.get());
@@ -54,9 +54,9 @@ public class CommentController {
         return newComment;
     }
 
-    @DeleteMapping("/post/read/{id}/comment/{commentID}")
+    @DeleteMapping("/post/read/{id}/comment/delete/{commentID}")        //댓글 삭제 기능
     public String deleteComment(@PathVariable Long id, @PathVariable Long commentID){
-        //commentRepository.deleteByID(id);
-        return "delete success";
+        commentService.deleteByID(commentID);
+        return "redirect:/post/read/{id}";
     }
 }
