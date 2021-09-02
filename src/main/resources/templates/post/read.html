@@ -43,7 +43,13 @@
                 </td>
                 <td>
                     <form th:action="@{'/post/read/' + ${postRead.id} + '/comment/update/' + ${comment.id}}" th:method="get">
-                        <button th:type="submit" >수정</button>
+                        <button th:type="button" >수정</button>
+                        <form th:action="@{'/post/update/' + ${postRead.id}}" method="post">
+                            <input type="hidden" name="_method" value="put"/>
+                            title : <input type="text" th:name="title" th:value="${postRead.title}"> <br>
+                            userid :  <input type="text" th:name="userid" th:value="${postRead.userid}"><br>
+                            content : <input type="text" th:name="content" th:value="${postRead.content}"/><br>
+                            <button  type = "submit">게시글 수정</button>
                     </form>
                 </td>
             </div>
