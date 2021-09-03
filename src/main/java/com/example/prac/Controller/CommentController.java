@@ -39,19 +39,17 @@ public class CommentController {
         commentForm.setPostEntity(postItem.get());
         //commentRepository.save(commentForm.toEntity());
         commentService.save(commentForm);
-        System.out.println(commentForm.getPostEntity());
         return "redirect:/post/read/{id}";
     }
 
-    @PostMapping("post/read/{id}/comment/update/{commentID}")
-    public CommentEntity updateComment(@PathVariable Long id,@PathVariable Long commentID, @RequestBody CommentEntity commentEntity){
+    @PutMapping("post/read/{id}/comment/update/{commentID}")        //댓글 수정 기능
+    public String updateComment(@PathVariable Long id,@PathVariable Long commentID, CommentForm commentForm){
         Optional<PostEntity> postItem = postRepository.findById(id);
-        //CommentEntity.setPost(postItem.get());
-        CommentEntity newComment = commentRepository.findById(commentID).get();
-        newComment.setTitle(commentEntity.getTitle());
-        newComment.setContent(commentEntity.getContent());
-        newComment.setUserid(commentEntity.getUserid());
-        return newComment;
+        commentForm.setPostEntity(postItem.get());
+
+        commentForm.setId(commentID);
+        commentService.update(commentForm);
+        return "redirect:/post/read/{id}";
     }
 
     @DeleteMapping("/post/read/{id}/comment/delete/{commentID}")        //댓글 삭제 기능

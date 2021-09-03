@@ -21,6 +21,11 @@ public class CommentService {
     }
 
     @Transactional
+    public Long update(CommentForm commentForm){
+        return commentRepository.save(commentForm.toEntityUpdate()).getId();
+    }
+
+    @Transactional
     public void deleteByID(Long commentID) {
         commentRepository.deleteById(commentID);
     }
