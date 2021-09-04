@@ -35,4 +35,15 @@ public class CommentForm {
         return commentEntity;
     }
 
+    public CommentEntity toEntityUpdate() {
+        CommentEntity commentEntityUpdate = CommentEntity.builder()
+                .id(id)
+                .title(title)
+                .content(content)
+                .userid(userid)
+                .postEntity(postEntity)
+                .build();
+        return commentEntityUpdate;
+    }
+
 }
