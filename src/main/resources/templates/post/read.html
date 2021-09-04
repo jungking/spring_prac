@@ -42,9 +42,8 @@
                     </form>
                 </td>
                 <td>
-                    <form th:action="@{'/post/read/' + ${postRead.id} + '/comment/update/' + ${comment.id}}" th:method="get">
-                        <button th:type="button" >수정</button>
-                        <form th:action="@{'/post/update/' + ${postRead.id}}" method="post">
+                    <form th:action="@{'/post/read/' + ${postRead.id} + '/comment/update/' + ${comment.id}}" th:method="post">
+                        <form th:action="@{'/post/update/' + ${postRead.id}}" method="put">
                             <input type="hidden" name="_method" value="put"/>
                             title : <input type="text" th:name="title" th:value="${postRead.title}"> <br>
                             userid :  <input type="text" th:name="userid" th:value="${postRead.userid}"><br>
