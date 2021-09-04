@@ -19,20 +19,17 @@ public class UserController {
 
     @GetMapping("/signup")
     public String createUserForm(){
-        System.out.println("get registerUser");
         return "signup";
     }
 
     @PostMapping("/signup")
     public String createUser(AccountForm form){
-        System.out.println("post registerUser");
         accountService.save(form);
         return "redirect:/login";
     }
 
     @GetMapping("/login")
     public String getLogin(){
-        System.out.println("get Login");
         return "/login";
     }
 
