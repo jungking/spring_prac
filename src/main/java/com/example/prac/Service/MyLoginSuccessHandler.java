@@ -15,7 +15,7 @@ public class MyLoginSuccessHandler implements AuthenticationSuccessHandler {
                 HttpServletResponse response, Authentication authentication)
                 throws IOException, ServletException {
         HttpSession session = request.getSession();
-
+        System.out.println("Success : Log In");
         session.setAttribute("userid", authentication.getName());
         response.sendRedirect("/");
     }

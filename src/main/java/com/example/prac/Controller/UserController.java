@@ -25,6 +25,7 @@ public class UserController {
     @PostMapping("/signup")
     public String createUser(AccountForm form){
         accountService.save(form);
+        System.out.println("Success : Sign Up");
         return "redirect:/login";
     }
 
@@ -36,6 +37,7 @@ public class UserController {
     @GetMapping("/logout")
     public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
         new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
+        System.out.println("Success : Log Out");
         return "redirect:/";
     }
 }
