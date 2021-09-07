@@ -1,5 +1,6 @@
 package com.example.prac.Controller;
 
+import com.example.prac.Domain.Account;
 import com.example.prac.Dto.AccountForm;
 import com.example.prac.Service.AccountService;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 @RequiredArgsConstructor
 public class UserController {
+    private Account account;
     private final AccountService accountService;
 
     @GetMapping("/signup")
@@ -24,8 +26,14 @@ public class UserController {
 
     @PostMapping("/signup")
     public String createUser(AccountForm form){
+
+        account = accountService.loadUserByUsername(form.getUsername());
+        System.out.println(account.getUsername());
+
         accountService.save(form);
         System.out.println("Success : Sign Up");
+
+
         return "redirect:/login";
     }
 
