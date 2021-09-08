@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -25,16 +26,20 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public String createUser(AccountForm form){
+    public String createUser(AccountForm form, Model model)throws Exception{
+        try {
+            accountService.save(form);
+            model.addAttribute("message","로그인 실패");
+            model.addAttribute("href","/signup");
+            System.out.println("Success : Sign Up1");
 
-        account = accountService.loadUserByUsername(form.getUsername());
-        System.out.println(account.getUsername());
+        }catch(NullPointerException e){
+            model.addAttribute("message","로그인 실패");
+            model.addAttribute("href","/signup");
+            System.out.println("Success : Sign Up2");
 
-        accountService.save(form);
-        System.out.println("Success : Sign Up");
-
-
-        return "redirect:/login";
+        }
+        return "redirect:/message";
     }
 
     @GetMapping("/login")
