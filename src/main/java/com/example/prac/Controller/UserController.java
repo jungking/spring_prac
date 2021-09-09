@@ -29,17 +29,17 @@ public class UserController {
     public String createUser(AccountForm form, Model model)throws Exception{
         try {
             accountService.save(form);
-            model.addAttribute("message","로그인 실패");
+            model.addAttribute("message","회원가입 성공");
             model.addAttribute("href","/signup");
             System.out.println("Success : Sign Up1");
 
         }catch(NullPointerException e){
-            model.addAttribute("message","로그인 실패");
+            model.addAttribute("message","회원가입 실패");
             model.addAttribute("href","/signup");
             System.out.println("Success : Sign Up2");
 
         }
-        return "redirect:/message";
+        return "redirect:message";
     }
 
     @GetMapping("/login")
