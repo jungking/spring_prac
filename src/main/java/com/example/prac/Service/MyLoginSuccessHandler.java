@@ -17,6 +17,8 @@ public class MyLoginSuccessHandler implements AuthenticationSuccessHandler {
         HttpSession session = request.getSession();
         System.out.println("Success : Log In");
         session.setAttribute("userid", authentication.getName());
-        response.sendRedirect("/");
+        session.setAttribute("message","회원가입 성공");
+        session.setAttribute("href","/signup");
+        response.sendRedirect("message");
     }
 }
