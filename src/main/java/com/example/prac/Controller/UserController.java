@@ -27,14 +27,11 @@ public class UserController {
 
     @PostMapping("/signup")
     public String createUser(AccountForm form, Model model)throws Exception{
-
             accountService.save(form);
             model.addAttribute("message","회원가입 성공");
-            model.addAttribute("href","/signup");
+            model.addAttribute("href","/login");
             System.out.println("Success : Sign Up1");
-
-
-        return "redirect:message";
+        return "error/message";
     }
 
     @GetMapping("/login")

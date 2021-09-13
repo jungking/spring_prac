@@ -1,18 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <span th:text="${session.userid}"></span>
+    <title></title>
+    <th:block th:if="${session.message} != ''">
+        <script>
+            top.alert('${session.message}');
+            console.log('${session.href}');
+            top.location.href = '[[${session.href}]]';
+        </script>
+    </th:block>
 
-    <th:block th:if="${#strings.length(session.message) != 0}">
-        <script>
-            alert("[[${session.message}]]");
-        </script>
-    </th:block>
-    <th:block th:if="${#strings.length(session.href) != 0}">
-        <script>
-            location.href = '[[${session.href}]]';
-        </script>
-    </th:block>
 
 </head>
 </html>
