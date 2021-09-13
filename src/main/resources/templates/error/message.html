@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-  <body>
+    <span th:text="${session.userid}"></span>
 
-        </th:block>
-</body>
+    <th:block th:if="${#strings.length(session.message) != 0}">
+        <script>
+            alert("[[${session.message}]]");
+        </script>
+    </th:block>
+    <th:block th:if="${#strings.length(session.href) != 0}">
+        <script>
+            location.href = '[[${session.href}]]';
+        </script>
+    </th:block>
+
 </head>
 </html>
