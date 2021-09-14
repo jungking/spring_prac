@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // 2
     protected void configure(HttpSecurity http) throws Exception { // 5
         http
                 .authorizeRequests() // 6
-                .antMatchers("/login", "/signup", "/user", "/message").permitAll() // 누구나 접근 허용
+                .antMatchers("/message", "/login", "/signup", "/user").permitAll() // 누구나 접근 허용
                 .antMatchers("/").hasRole("USER") // USER, ADMIN만 접근 가능
                 .antMatchers("/admin").hasRole("ADMIN") // ADMIN만 접근 가능
                 .antMatchers("h2-console/**").permitAll()

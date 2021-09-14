@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>message</title>
+</head>
+<body>
+    <script>
+        alert('${session.message}');
+        location.href = '<c:out value="${pageContext.request.contextPath}"/>${session.href}';
+        <th:block ${session.messege}>
+    </script>
+</body>
+
+</html>
