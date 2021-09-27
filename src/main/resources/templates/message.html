@@ -4,10 +4,20 @@
     <title>message</title>
 </head>
 <body>
-    <script>
-        alert(${session.message});
-        location.href = '<c:out value="${pageContext.request.contextPath}"/>${session.href}';
-    </script>
+        <li th:if="${message} == 1" >
+            <script>
+                alert("회원가입 성공");
+                location.href = '<c:out value="${pageContext.request.contextPath}"/>${session.href}';
+            </script>
+        </li>
+
+        <li th:if="${message} == 0" >
+            <script>
+                alert("회원가입 실패");
+                location.href = '<c:out value="${pageContext.request.contextPath}"/>${session.href}';
+            </script>
+        </li>
+
 </body>
 
 </html>
