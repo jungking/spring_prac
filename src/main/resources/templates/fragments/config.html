@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.nete.nz/thymeleaf/layout">
+
+<head th:fragment = "configFragment">
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}">
+    <style>
+        .headerDiv{
+            border:3px solid blueviolet;
+        }
+    </style>
+
+    <!-- 공통 css파일 -->
+    <th:block th:replace="common/styles"></th:block>
+
+    <!-- content css파일 -->
+    <th:block layout:fragment="css"></th:block>
+
+    <!-- javascript 파일 -->
+    <th:block th:replace="common/scripts"></th:block>
+
+    <!-- content javascript 파일 -->
+    <th:block layout:fragment="script"></th:block>
+
+</head>
+</html>
