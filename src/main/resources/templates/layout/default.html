@@ -1,10 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-    <head th:replace="fragments/config :: configFragment"></head>
-        header
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!--        layout/default.html : layout의 기본 틀이 되는 html
+            fragments/config.html : css 및 js 링크를 관리하는 head
+            fragments/header.html : body의 머리
+            content : body의 몸통(실질적인 핵심)
+            fragments/footer.html : body의 꼬리                -->
+
+<head th:replace = "fragments/config :: configFragment">
+    <!--<title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">default</title>-->
+</head>
+
+    <!-- header 영역 -->
     <header th:replace="fragments/header :: headerFragment"></header>
 
-    <div layout:fragment = "content"></div>
+    <!-- sidebar 영역 -->
+    <header th:replace="fragments/sidebar :: sidebarFragment"></header>
 
-    <footer th:replace="fragments/footer :: footerFragment"></footer>
+    <!-- content 영역 -->
+    <div layout:fragment="content"></div>
+
+    <!-- footer 영역 -->
+    <header th:replace="fragments/footer :: footerFragment"></header>
+
 </html>
