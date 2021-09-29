@@ -2,9 +2,17 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator = "layout/default">
+      layout:decorator = "~{layout/default}">
 
-<div layout:fragment="content">
-    content</div>
+<head>
+    <title>content1</title>
+</head>
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" href = "css/content1.css"/>
+</th:block>
+
+<div layout:fragment="content" style="width:100%; height:100px; background: #f2d299;">
+    content1</div>
 
 </html>

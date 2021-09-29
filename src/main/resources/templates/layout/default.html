@@ -14,15 +14,15 @@
 </head>
 
     <!-- header 영역 -->
-    <header th:replace="fragments/header :: headerFragment"></header>
+    <header th:replace="~{fragments/header :: headerFragment}"> header </header>
 
     <!-- sidebar 영역 -->
-    <header th:replace="fragments/sidebar :: sidebarFragment"></header>
+    <th:block th:replace="fragments/sidebar :: sidebarFragment"> sidebar </th:block>
 
     <!-- content 영역 -->
-    <div layout:fragment="content"></div>
+    <th:block layout:fragment="content"> </th:block>
 
     <!-- footer 영역 -->
-    <header th:replace="fragments/footer :: footerFragment"></header>
+    <footer th:replace="fragments/footer :: footerFragment"> footer </footer>
 
 </html>
