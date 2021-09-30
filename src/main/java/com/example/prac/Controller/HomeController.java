@@ -18,9 +18,4 @@ public class HomeController {
     public String index(Model model, Authentication authentication) {
         return "main";
     }
-
-    @GetMapping("/content")
-    public String content() {
-        return "views/content";
-    }
 }

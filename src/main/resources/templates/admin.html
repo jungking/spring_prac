@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-      xmlns:th="http://www.w3.org/1999/xhtml">
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
 
 <head>
   <title>admin</title>
 </head>
 <body>
+<div layout:fragment = "content">
 <h2>관리자 전용 페이지</h2>
 ID : <span sec:authentication="name"></span> <br>
 소유 권한 : <span sec:authentication="authorities"></span> <br>
@@ -16,5 +19,6 @@ ID : <span sec:authentication="name"></span> <br>
   <input type="submit" value="로그아웃"/>
 </form>
 
+</div>
 </body>
 </html>

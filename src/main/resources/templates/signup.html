@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="~{layout/default}">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
   <meta charset="UTF-8">
   <title>sign up</title>
 </head>
 <body>
-<div layout:fragment = "content">
   <h1>Sign Up</h1> <hr>
 
   <th:block layout:fragment="css"> </th:block>
@@ -24,7 +22,6 @@
   </form> <br>
 
   <a href="/login">Go to login →</a>
-</div>
 </body>
 
 </html>
