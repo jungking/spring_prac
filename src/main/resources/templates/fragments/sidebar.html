@@ -22,7 +22,7 @@
           <a href="#" class="nav__logo">Bedimcode</a>
         </div>
         <div class="nav__list">
-          <a href="#" class="nav__link active">
+          <a href="/" class="nav__link active">
             <ion-icon name="home-outline" class="nav__icon"></ion-icon>
             <span class="nav_name">Dashboard</span>
           </a>
@@ -67,9 +67,11 @@
             <span class="nav_name">Settings</span>
           </a>
         </div>
-        <a href="#" class="nav__link">
+        <a href="/logout" class="nav__link" method="POST">
           <ion-icon name="log-out-outline" class="nav__icon"></ion-icon>
           <span class="nav_name">Log out</span>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
         </a>
       </div>
     </nav>
@@ -79,7 +81,8 @@
   <!-- IONICONS -->
   <script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
   <!-- JS -->
-  <script src="/js/sidebar.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script type = "text/javascript" th:src="@{/js/sidebar.js}"></script>
   </body>
 
 </th:block>
