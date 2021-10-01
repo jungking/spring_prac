@@ -27,19 +27,17 @@ public class UserController {
 
     @PostMapping("/signup")
     public String createUser(AccountForm form, Model model)throws Exception{
-        try {
-            accountService.save(form);
-            model.addAttribute("message","회원가입 성공");
-            model.addAttribute("href","/signup");
-            System.out.println("Success : Sign Up1");
+            try{
+                accountService.save(form);
+                model.addAttribute("message",1);
+                model.addAttribute("href","login");
+                System.out.println("Success : Sign Up1");
+            } catch(Exception e){
+                model.addAttribute("message",0);
+                model.addAttribute("href","/signup");
+            }
 
-        }catch(NullPointerException e){
-            model.addAttribute("message","회원가입 실패");
-            model.addAttribute("href","/signup");
-            System.out.println("Success : Sign Up2");
-
-        }
-        return "redirect:message";
+        return "message";
     }
 
     @GetMapping("/login")
