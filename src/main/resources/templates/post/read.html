@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html
         xmlns:th="http://www.thymeleaf.org"
-        lang="en">
+        lang="en"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/default}">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<div layout:fragment = "content">
     <input type="hidden" name="_method" value="put"/>
     title : <span th:text="${postRead.title}"></span><br>
     userid :  <span th:text="${postRead.userid}"></span><br>
@@ -60,6 +63,6 @@
         userid :  <input type = "text" th:name="userid"> <br>
         <button type = "submit">댓글 작성하기</button> <br>
     </form>
-
+</div>
 </body>
 </html>
