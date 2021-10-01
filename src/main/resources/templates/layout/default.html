@@ -12,22 +12,22 @@
     <head>
         <meta charset = "UTF-8">
         <title>zzz</title>
-        <th:block th:replace = "fragments/config :: configFragment"></th:block>
+        <th:block th:replace = "fragments/config :: configFragment"> </th:block>
         <!--<title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">default</title>-->
     </head>
 
     <body>
         <!-- header 영역 -->
-        <th:block th:replace="fragments/header :: headerFragment"></th:block>
+        <th:block th:replace="fragments/header :: headerFragment"> </th:block>
 
         <!-- sidebar 영역 -->
-        <th:block th:replace="fragments/sidebar :: sidebarFragment"></th:block>
+        <th:block th:replace="fragments/sidebar :: sidebarFragment"> </th:block>
 
         <!-- content 영역 -->
-        <th:block layout:fragment="content"></th:block>
+        <th:block layout:fragment="content"> </th:block>
 
         <!-- footer 영역 -->
-        <th:block th:replace="fragments/footer :: footerFragment"></th:block>
+        <th:block th:replace="fragments/footer :: footerFragment"> </th:block>
     </body>
 
 </html>
